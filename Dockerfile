@@ -1,13 +1,11 @@
 # To build and compile Angular
-FROM node:16 as node
+FROM node:alpine as build 
 WORKDIR /app
-COPY ./ /app/
-RUN npm install
-ARG configuration=production
-RUN npm run build -- --configuration=$configuration
-
-# Copy to ready for production with Nginx
-FROM nginx:alpine
+COPY package*.json ./
+RUN npm install 
+COPY . .
+RUN npm run build
+FROM nginx 
 EXPOSE 80
-COPY --from=node /app/dist/front-docker /usr/share/nginx/html
+COPY --from=build /app/dist/front-docker /usr/share/nginx/html
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
