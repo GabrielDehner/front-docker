@@ -1,15 +1,8 @@
 version: '3'
 services: 
-  api: 
-    build: 
-      context: ./api
-    container_name: api
-    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/app-api
-    ports: 
-      - "3000:3000"
   ui: 
     build: 
-      context: ./ui
+      context: .
     container_name: ui
     image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/app-ui
     ports: 
@@ -20,7 +13,6 @@ services:
     container_name: nginx
     depends_on: 
       - ui
-      - api
     image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/app-nginx
     ports: 
       - "80:80"
