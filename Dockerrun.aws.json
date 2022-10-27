@@ -1,19 +1,13 @@
 {
-  "AWSEBDockerrunVersion": 2,
-  "containerDefinitions": [
-    {
-      "name": "nginx",
-      "image": "452359159316.dkr.ecr.sa-east-1.amazonaws.com/front-docker",
-      "hostname": "nginx",
-      "essential": true,
-      "portMappings": [ 
-        {
-          "hostPort": 80,
-          "containerPort": 80
-        }
-      ],
-      "links": [""],
-      "memory": 512
-    }
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+      "Name": "452359159316.dkr.ecr.sa-east-1.amazonaws.com/front-docker",
+      "Update": "true"
+  },
+  "Ports": [
+      {
+          "ContainerPort": 80,
+          "HostPort": 80
+      }
   ]
 }
